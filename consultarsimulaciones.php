@@ -61,15 +61,15 @@
 		<br />
 		<br />
 		<form name="loginform" action="" method="post" onSubmit="this.adicionarCombo()">
-	    <table width="600" border="0" align="center" cellpadding="2" cellspacing="5" >
+	    <table width="800" border="0" align="center" cellpadding="2" cellspacing="5" >
 	      <?php
-	      	if($_SERVER["REQUEST_METHOD"] != "POST") {
 	      		if($_SESSION['user_type'] == 1){
 	      			echo '<tr border="0">';
 		       		echo '<td><div width="430" align="left">Seleccione la simulación a consultar:</div></td>';
 		        	echo '<td><select name="simulacionsel">';
 		        	$sesiones = new Sesion();
 			        $result=$sesiones->simulacionesUsuario($_SESSION['user_id']);
+			        echo "<option value='0'>Seleccione una simulacion</option>";
 		    	    foreach($result as $row){
 		    	    	$nomArchivo=substr($row['archivo'],0,strlen($row['archivo'])-4);
 		        		echo "<option value='".$row['id']."'>".$nomArchivo."</option>";
@@ -80,6 +80,7 @@
 		      		echo'<tr border="0">';
 		        	echo'<td><div width="430" align="left">Seleccione el usuario que desea consultar:</div></td>';
 		        	echo '<td><select name="usuariosel" onChange="adicionarCombo(this.form)">';
+		        	echo "<option value='0'>Seleccione un usuario a consultar</option>";
 		        	$sesiones = new Sesion();
 		        	$result=$sesiones->todosUsuarios();
 		        	foreach($result as $row){
@@ -87,18 +88,7 @@
 		        	}
 		        	echo'</select></td>';
 		      		echo'</tr>';
-		      		echo '<tr border="0">';
-	       			echo '<td><div width="430" align="left">Seleccione la simulación a consultar:</div></td>';
-	        		echo '<td><select name="simulacionsel">';
-		        	$sesiones = new Sesion();
-		        	$result=$sesiones->simulacionesUsuario($us);
-	    	    	foreach($result as $row){
-	        			echo "<option value='".$row['id']."'>".$row['id_usuario']."-".$row['fecha']."</option>";
-	        		}
-	        		echo '</select></td>';
-	      			echo '</tr>';
 		      	}
-	      	}
 	      ?> 
 	      <tr>
 	        <td><div align="left">Seleccione la fecha inicial de busqueda:</div></td>
@@ -113,8 +103,106 @@
 	        <td><input name="" type="submit" value="Consultar" /></td>
 	      </tr>
 	    </table>
-    </form>
+	</form>
+	<?php
+	if($_SERVER["REQUEST_METHOD"] == "POST") {
+	      		if($_SESSION['user_type'] == 1){
+	      			$sesiones = new Sesion();
+	      			 if(isset($_POST['simulacionsel']) && $_POST['simulacionsel']!=0){
+	        			$simulacion=$_POST['simulacionsel'];
+	        			echo '<div id="resultadoconsulta">';
+	        			echo '<table>';
+	        			echo '<tr>';
+	        			echo '<th>Id Simulacion</th>';
+	        			echo '<th>Usuario</th>';
+	        			echo '<th>Fecha Creacion</th>';
+	        			echo '<th>Archivo Generado</th>';
+						$stmt=$sesiones->simulacionPorId($simulacion);
+						$row=$stmt->fetch(PDO::FETCH_ASSOC);
+		    	    	$nomArchivo=$row['archivo'];
+			    	    $yourfile='pdf/'.$nomArchivo;
+			    	    $newDate = date("Y-m-d", strtotime($row['Fecha']));
+			    	    echo '<tr>';
+			        	echo '<td>'.$row['id'].'</td><td>'.$_SESSION['login_user'].'</td><td>'.$newDate.'</td><td><img src="images/pdf-icon.png"><a href="'.$yourfile.'" download>'.$nomArchivo.'</a></img></td><td>';
+			        	echo '</table></div>';	
+	        		}elseif(isset($_POST['simulacionsel']) && $_POST['simulacionsel']==0 && strcmp($_POST['fechainicial'],'')!=0 && strcmp($_POST['fechafinal'],'')!=0 ){
+	        			$fechaini=$plazo=	$_POST['fechainicial'];
+						$fechafin=$plazo=	$_POST['fechafinal'];
+	        			$result=$sesiones->simulacionesUsuarioPorFechas($_SESSION['user_id'],$fechaini,$fechafin);
+	        			$count = $result->rowCount();
+	        			if($count==0){
+	        				$sesiones->phpAlert('El usuario NO tiene simulaciones creadas en las fechas especificadas!');
+	        			}else{
+	        				echo '<div id="resultadoconsulta">';
+		        			echo '<table>';
+		        			echo '<tr>';
+		        			echo '<th>Id Simulacion</th>';
+		        			echo '<th>Usuario</th>';
+		        			echo '<th>Fecha Creacion</th>';
+		        			echo '<th>Archivo Generado</th>';
+				    	    foreach($result as $row){
+				    	    	$nomArchivo=$row['archivo'];
+				    	    	$yourfile='pdf/'.$nomArchivo;
+				    	    	$newDate = date("Y-m-d", strtotime($row['Fecha']));
+				    	    	echo '<tr>';
+				        		echo '<td>'.$row['id'].'</td><td>'.$_SESSION['login_user'].'</td><td>'.$newDate.'</td><td><img src="images/pdf-icon.png"><a href="'.$yourfile.'" download>'.$nomArchivo.'</a></img></td><td>';
+				        	}
+				        	echo '</table></div>';	
+				        }	
+	        		}else{
+	        			$sesiones->phpAlert('Por favor seleccione un usuario o digite el rango de fechas para consultar simulaciones!');
+	        		}
+	        		
+	      		}else{
+	      			if(isset($_POST['usuariosel']) && $_POST['usuariosel']!=0 && strcmp($_POST['fechainicial'],'')==0 && strcmp($_POST['fechafinal'],'')==0){
+	        			$iduser=$_POST['usuariosel'];
+	        			$result=$sesiones->simulacionesUsuario($iduser);
+	        			$count=$result->rowCount();
+	        			if($count==0){
+	        				$sesiones->phpAlert('El usuario consultado NO tiene simulaciones creadas!');
+	        			}else{	
+	        				
+	      					echo '<div id="resultadoconsulta">';
+	        				echo '<table>';
+	        				echo '<tr>';
+	        				echo '<th>Id Simulacion</th>';
+	        				echo '<th>Usuario</th>';
+	        				echo '<th>Fecha Creacion</th>';
+	        				echo '<th>Archivo Generado</th>';
+				    	    foreach($result as $row){
+				    	    	$nomArchivo=$row['archivo'];
+				    	    	$yourfile='pdf/'.$nomArchivo;
+				    	    	$newDate = date("Y-m-d", strtotime($row['Fecha']));
+				    	    	echo '<tr>';
+				        		echo '<td>'.$row['id'].'</td><td>'.$iduser.'</td><td>'.$newDate.'</td><td><img src="images/pdf-icon.png"><a href="'.$yourfile.'" download>'.$nomArchivo.'</a></img></td><td>';
+				        	}
+				        	echo '</table></div>';
+			        	}
 
-    
+	      			}elseif(isset($_POST['usuariosel']) && $_POST['usuariosel']==0 && strcmp($_POST['fechainicial'],'')!=0 && strcmp($_POST['fechafinal'],'')!=0){
+	      				$fechaini=$plazo=	$_POST['fechainicial'];
+						$fechafin=$plazo=	$_POST['fechafinal'];
+	        			echo '<div id="resultadoconsulta">';
+	        			echo '<table>';
+	        			echo '<tr>';
+	        			echo '<th>Id Simulacion</th>';
+	        			echo '<th>Usuario</th>';
+	        			echo '<th>Fecha Creacion</th>';
+	        			echo '<th>Archivo Generado</th>';
+	        			$result=$sesiones->simulacionesPorFechas($fechaini,$fechafin);
+			    	    foreach($result as $row){
+			    	    	$nomArchivo=$row['archivo'];
+			    	    	$yourfile='pdf/'.$nomArchivo;
+			    	    	$newDate = date("Y-m-d", strtotime($row['Fecha']));
+			    	    	echo '<tr>';
+			        		echo '<td>'.$row['id'].'</td><td>'.$_SESSION['login_user'].'</td><td>'.$newDate.'</td><td><img src="images/pdf-icon.png"><a href="'.$yourfile.'" download>'.$nomArchivo.'</a></img></td><td>';
+			        	}
+			        	echo '</table></div>';	
+	      			}else{
+	      				$sesiones->phpAlert('Por favor seleccione una simulacion o digite el rango de fechas para consultar simulaciones!');
+	      			}
+	      	}		
+	}
+	?>
     </body>
     </html>

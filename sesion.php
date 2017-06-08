@@ -17,8 +17,35 @@
 
        public function simulacionesUsuario($user){
             $pdo = $this->conexionBD();
-            $stmt = $pdo->prepare('SELECT id, archivo FROM simulacion where id_usuario = ?');
+            $stmt = $pdo->prepare('SELECT * FROM simulacion where id_usuario = ?');
             $stmt->bindValue(1, $user, PDO::PARAM_INT); 
+            $stmt->execute();
+            return $stmt;
+       }
+
+       public function simulacionesPorFechas($fh_ini, $fh_fin){
+            $pdo = $this->conexionBD();
+            $stmt = $pdo->prepare('SELECT * FROM simulacion WHERE Fecha between ? and ?');
+            $stmt->bindValue(1, $fh_ini, PDO::PARAM_STR); 
+            $stmt->bindValue(2, $fh_fin, PDO::PARAM_STR); 
+            $stmt->execute();
+            return $stmt;
+       }
+
+       public function simulacionesUsuarioPorFechas($user,$fh_ini, $fh_fin){
+            $pdo = $this->conexionBD();
+            $stmt = $pdo->prepare('SELECT * FROM simulacion WHERE id_usuario= ? Fecha between ? and ?');
+            $stmt->bindValue(1, $user, PDO::PARAM_INT); 
+            $stmt->bindValue(2, $fh_ini, PDO::PARAM_STR); 
+            $stmt->bindValue(3, $fh_fin, PDO::PARAM_STR); 
+            $stmt->execute();
+            return $stmt;
+       }
+
+      public function simulacionPorId($id_sim){
+            $pdo = $this->conexionBD();
+            $stmt = $pdo->prepare('SELECT * FROM simulacion WHERE id = ?');
+            $stmt->bindValue(1, $id_sim, PDO::PARAM_STR); 
             $stmt->execute();
             return $stmt;
        }
