@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="css/table.css" media="screen" />
+<script src="js/simulador.js"></script>
+  <title>Simulador Hipotecario - UPTC</title>
+</head>
+<body onload="limpiar();">
+      <h1>SIMULADOR&nbsp;HIPOTECARIO - UPTC</h1>
+      <p>
+      <h2>Ingrese el valor de la vivienda a adquirir *</h2>  <input name="ValorVivienda" id="ValorVivienda" size="0" maxlength="10">
+      <h5>* Préstamos con subsidio solo aplican para vivienda mayor a 70 SMLV y menor a 135 SMLV por los primeros 7 años del crédito</h5>
+      </p>
+      <p>
+      <h2>Ingrese el valor del credito a solicitar</h2>  <input name="ValorCredito" id="ValorCredito" size="0" maxlength="10"></p>
+      <p>
+      <h2>Seleccione la edad del deudor</h2> <select name="listaanios" id="listaanios"></select>
+      <script type="text/javascript">
+            crearListaAnios();
+      </script>
+      <p>
+      <p>
+      <h2>Seleccione el número de cuotas del crédito en meses</h2> <select name="lista" id="lista"></select>
+      <script type="text/javascript">
+		crearLista();
+      </script>
+      <p>
+      <input name="calcular" type="button" value="Calcular" onclick="calcularSimulacion()"></p>
+      <div id="myDynamicTable"></div>
+</body>
+</html>
