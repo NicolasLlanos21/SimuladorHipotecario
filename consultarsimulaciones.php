@@ -149,7 +149,7 @@
 				    	    	$yourfile='pdf/'.$nomArchivo;
 				    	    	$newDate = date("Y-m-d", strtotime($row['Fecha']));
 				    	    	echo '<tr>';
-				        		echo '<td>'.$row['id'].'</td><td>'.$_SESSION['login_user'].'</td><td>'.$newDate.'</td><td><img src="images/pdf-icon.png"><a href="'.$yourfile.'" download>'.$nomArchivo.'</a></img></td><td>';
+				        		echo '<td>'.$row['id'].'</td><td>'.$_SESSION['login_user'].'</td><td>'.$newDate.'</td><td><img src="images/pdf-icon.png"><a href="'.$yourfile.'" download>'.$nomArchivo.'</a></img></td>';
 				        	}
 				        	echo '</table></div>';	
 				        }	
