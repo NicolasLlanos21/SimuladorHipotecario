@@ -65,9 +65,10 @@
 		<br />
 		<br />
 		<form name="loginform" action="" method="post" onSubmit="this.adicionarCombo()">
-	    <table width="800" border="0" align="center" cellpadding="2" cellspacing="5" >
 	      <?php
 	      		if($_SESSION['user_type'] == 1){
+	      			echo '<p>Por favor seleccione la simulación a consultar o seleccione el rango de fechas de búsqueda, las dos formas de búsqueda son excluyentes</p>';
+	      			echo'<table width="800" border="0" align="center" cellpadding="2" cellspacing="5" >';
 	      			echo '<tr border="0">';
 		       		echo '<td><div width="430" align="left">Seleccione la simulación a consultar:</div></td>';
 		        	echo '<td><select name="simulacionsel">';
@@ -81,6 +82,8 @@
 		        	echo '</select></td>';
 		      		echo '</tr>';
 	      		}elseif ($_SESSION['user_type'] == 2){
+	      			echo '<p>Por favor seleccione el usuario a consultar o seleccione el rango de fechas de búsqueda, las dos formas de búsqueda son excluyentes</p>';
+	      			echo'<table width="800" border="0" align="center" cellpadding="2" cellspacing="5" >';
 		      		echo'<tr border="0">';
 		        	echo'<td><div width="430" align="left">Seleccione el usuario que desea consultar:</div></td>';
 		        	echo '<td><select name="usuariosel" onChange="adicionarCombo(this.form)">';
