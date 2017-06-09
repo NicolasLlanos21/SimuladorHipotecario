@@ -152,9 +152,9 @@ class funcion{
 				             <th>Saldo</th>
 	         	 			</tr>';
 	         $valorcuota= floor(($totalcapital*$tasaint)/(1-pow(1+$tasaint,(-1*$plazo)))*100)/100;
-	        if (($totviv >= $minsubsidio) && ($ingFam < (2*$salariominimo))){
+	        if (($totviv <= $minsubsidio) && ($ingFam <= (2*$salariominimo))){
 						$subsidio= round(($totalcapital*($tasaSub/100))/$plazo);	
-			}else if (($ingFam < (2*$salariominimo) || $ingFam > (4*$salariominimo)) && ($totviv >= $minsubsidio || $totviv<=$maxsubsidio)){ 
+			}else if (($ingFam > (2*$salariominimo) && $ingFam <= (4*$salariominimo)) && ($totviv > $minsubsidio || $totviv<=$maxsubsidio)){ 
 				$subsidio= round(($totalcapital*($tasaSub/100))/$plazo);
 			}else{
           		$subsidio= 0;
