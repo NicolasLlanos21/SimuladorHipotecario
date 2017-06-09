@@ -157,7 +157,7 @@
 				        	echo '</table></div>';	
 				        }	
 	        		}else{
-	        			$sesiones->phpAlert('Por favor seleccione un usuario o digite el rango de fechas para consultar simulaciones!');
+	        			$sesiones->phpAlert('Por favor seleccione una simulacion o digite el rango de fechas para consultar simulaciones!');
 	        		}
 	        		
 	      		}else{

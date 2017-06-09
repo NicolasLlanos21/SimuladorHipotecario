@@ -104,7 +104,7 @@
 
        public function crearParametroHistorico($id,$valor,$inicio_vig){
                   $pdo = $this->conexionBD();
-                  $stmt = $pdo->prepare('INSERT INTO parametros_historicos(id, id_parametro, valor, fecha_inicio_vigencia,fecha_final_vigencia) VALUES (NULL,?,?,CURDATE(),?)');
+                  $stmt = $pdo->prepare('INSERT INTO parametros_historicos(id, id_parametro, valor, fecha_inicio_vigencia,fecha_final_vigencia) VALUES (NULL,?,?,?,CURDATE())');
                   $stmt->bindValue(1, $id, PDO::PARAM_INT); 
                   $stmt->bindValue(2, $valor, PDO::PARAM_INT); 
                   $stmt->bindValue(3, $inicio_vig, PDO::PARAM_STR);
