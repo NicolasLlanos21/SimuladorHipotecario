@@ -108,26 +108,37 @@
 	        }else{
 	        	$evento=1;
 	        	$sesion->phpAlert('Por favor digite el valor del inmueble!');
-	        	Header('Refresh:1; url=simulador.php');
+	        	$URL='simulador.php';
+	        	echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+				echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
 	        }
 	         if(!empty($_POST['ValorCredito'])){
 	        	$valpres = $_POST['ValorCredito'];
 	        }else{
 	        	$evento=1;
 	        	$sesion->phpAlert('Por favor digite el valor del prestamo a solicitar!');
-                Header('Refresh:1; url=simulador.php');
+                 $URL='simulador.php';
+	        	echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+				echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
+
 	        }
 	        if(isset($_POST['lista'])){
 	        	$plazo=	$_POST['lista'];
 	        }else{
 	        	$evento=1;
 	        	$sesion->phpAlert('Por favor seleccione el plazo correspondiente!');
-	        	Header('Refresh:1; url=simulador.php');
+	        	$URL='simulador.php';
+	        	echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+				echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
+
 	        }
 	        if($valpres > $valviv){
 	        	$evento=1;
 	        	$sesion->phpAlert('El valor del prestamo no puede ser mayor al del inmueble!');
-	        	Header('Refresh:1; url=simulador.php');
+	        	$URL='simulador.php';
+	        	echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+				echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
+
 	        }
 	        if ($evento==0){
 		     	$funcion=new funcion();
@@ -149,7 +160,7 @@
 		     	$narch=substr($nomArch,4,strlen($nomArch));
 		     	$sesion->actualizarArchivoSim($narch,$idultsim);
 		     }
-	 }    
+	 } 
 	?>
 
 </form>

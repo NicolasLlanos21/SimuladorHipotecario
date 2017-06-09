@@ -107,7 +107,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Generar'])) {
 	} else {
 		$evento = 1;
 		$sesion->phpAlert('Por favor digite el valor del inmueble!');
-		Header('Refresh:1; url=simulador.php');
+		$URL = 'simulador.php';
+		echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+
+		echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
 
 	}
 	if (!empty($_POST['ValorCredito'])) {
@@ -115,7 +118,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Generar'])) {
 	} else {
 		$evento = 1;
 		$sesion->phpAlert('Por favor digite el valor del prestamo a solicitar!');
-		Header('Refresh:1; url=simulador.php');
+		$URL = 'simulador.php';
+		echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+
+		echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
 
 	}
 	if (isset($_POST['lista'])) {
@@ -123,13 +129,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['Generar'])) {
 	} else {
 		$evento = 1;
 		$sesion->phpAlert('Por favor seleccione el plazo correspondiente!');
-		Header('Refresh:1; url=simulador.php');
+		$URL = 'simulador.php';
+		echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+
+		echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
 
 	}
 	if ($valpres > $valviv) {
 		$evento = 1;
 		$sesion->phpAlert('El valor del prestamo no puede ser mayor al del inmueble!');
-		Header('Refresh:1; url=simulador.php');
+		$URL = 'simulador.php';
+		echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+
+		echo '<META HTTP-EQUIV="refresh" content="0;URL='.$URL.'">';
 
 	}
 	if ($evento == 0) {

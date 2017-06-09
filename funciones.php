@@ -199,7 +199,7 @@ class funcion{
                     $html=$html.'<h2 style="color: #2e6c80;">Resultado de la simulacion:</h2>';
                     $html=$html.$tablas;
                     $html=$html.'<p><strong>Total a pagar del prestamo con subsidio: '.$vlrconsub.'</strong></p>';
-                    $html=$html.'<p><strong>Total a pagar del prestamo con subsidio: '.$vlrsinsub.'</strong></html>';
+                    $html=$html.'<p><strong>Total a pagar del prestamo sin subsidio: '.$vlrsinsub.'</strong></html>';
                     $nombrearchivo='pdf/'.$_SESSION['login_user'].'_'.$hoy.'.pdf';
                     try
                     {   
