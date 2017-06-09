@@ -3,6 +3,10 @@ require_once ('sesion.php');
 //require_once('logout.php');
 if (!isset($_SESSION)) {
 	session_start();
+	if (!isset($_SESSION['login_user'])) {
+		header('Location: index.php');
+		exit();
+	}
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

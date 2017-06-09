@@ -4,6 +4,10 @@
     if(!isset($_SESSION)) 
     { 
         session_start(); 
+        if (!isset($_SESSION['login_user'])){
+        	header('Location: index.php');
+        	exit();
+        }
     } 
     function phpAlert($msg) {
     	echo '<script type="text/javascript">alert("' . $msg . '")</script>';
@@ -195,7 +199,7 @@
 			    	    	$yourfile='pdf/'.$nomArchivo;
 			    	    	$newDate = date("Y-m-d", strtotime($row['Fecha']));
 			    	    	echo '<tr>';
-			        		echo '<td>'.$row['id'].'</td><td>'.$_SESSION['login_user'].'</td><td>'.$newDate.'</td><td><img src="images/pdf-icon.png"><a href="'.$yourfile.'" download>'.$nomArchivo.'</a></img></td><td>';
+			        		echo '<td>'.$row['id'].'</td><td>'.$row['id_usuario'].'</td><td>'.$newDate.'</td><td><img src="images/pdf-icon.png"><a href="'.$yourfile.'" download>'.$nomArchivo.'</a></img></td><td>';
 			        	}
 			        	echo '</table></div>';	
 	      			}else{

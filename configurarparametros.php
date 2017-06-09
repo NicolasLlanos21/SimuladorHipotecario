@@ -3,6 +3,10 @@
       if(!isset($_SESSION)) 
       { 
         session_start(); 
+        if (!isset($_SESSION['login_user'])){
+        	header('Location: index.php');
+        	exit();
+        }
       } 
   	 function phpAlert($msg) {
     	echo '<script type="text/javascript">alert("' . $msg . '")</script>';

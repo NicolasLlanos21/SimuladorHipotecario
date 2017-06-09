@@ -34,7 +34,7 @@
 
        public function simulacionesUsuarioPorFechas($user,$fh_ini, $fh_fin){
             $pdo = $this->conexionBD();
-            $stmt = $pdo->prepare('SELECT * FROM simulacion WHERE id_usuario= ? Fecha between ? and ?');
+            $stmt = $pdo->prepare('SELECT * FROM simulacion WHERE id_usuario= ? AND Fecha between ? and ?');
             $stmt->bindValue(1, $user, PDO::PARAM_INT); 
             $stmt->bindValue(2, $fh_ini, PDO::PARAM_STR); 
             $stmt->bindValue(3, $fh_fin, PDO::PARAM_STR); 

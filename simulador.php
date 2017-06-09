@@ -3,8 +3,11 @@
    require_once('sesion.php');
    require_once('funciones.php');
    require_once('lib/pdfcrowd.php');
-   
-    if(!isset($_SESSION)) 
+   if (!isset($_SESSION['login_user'])){
+        	header('Location: index.php');
+        	exit();
+   }
+   if(!isset($_SESSION)) 
     { 
         session_start(); 
     } 
