@@ -80,8 +80,8 @@
        public function validarUsuario($user, $pass){
        	$pdo = $this->conexionBD();
        	$stmt = $pdo->prepare('SELECT * FROM usuario where username like ? and password like ?');
-      	$stmt->bindValue(1, "%$user%", PDO::PARAM_STR); 
-      	$stmt->bindValue(2, "%$pass%", PDO::PARAM_STR); 
+      	$stmt->bindValue(1, $user, PDO::PARAM_STR); 
+      	$stmt->bindValue(2, $pass, PDO::PARAM_STR); 
       	$stmt->execute();
      	$count =$stmt->rowCount();
      	return $count;
