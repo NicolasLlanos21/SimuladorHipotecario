@@ -1,10 +1,12 @@
-body {
-  background: #fafafa url(http://jackrugile.com/images/misc/noise-diagonal.png);
-  color: #444;
-  font: 100%/30px 'Helvetica Neue', helvetica, arial, sans-serif;
-  text-shadow: 0 1px 0 #fff;
-}
-
+	body {
+		margin: 0px;
+		padding: 0px;
+		background: #062901;
+		font-family: 'Raleway', sans-serif;
+		font-size: 11pt;
+		color: #000000;
+	}
+	
 strong {
   font-weight: bold; 
 }
@@ -37,8 +39,62 @@ th {
   text-shadow: 0 1px 0 #000;  
 }
 
+header
+		{
+			margin-bottom: 1em;
+		}
+			
+			header h2
+			{
+				font-weight: 600;
+			}
+		
+			header .byline
+			{
+				display: block;
+				margin: 0.5em 0 0 0;
+				padding: 0 0 0.5em 0;
+			}
+			
+			
+			#header
+	{
+		position: relative;
+	}
+
+		#header .container
+		{
+			position: relative;
+			padding: 6em 0em;
+		}
+		
+		
+	#logo
+	{
+	position: absolute;
+	left: 336px;
+	top: 22px;
+	width: 721px;
+	height: 124px;
+	}
+	
+		#logo h1
+		{
+			color: #FFF;
+		}
+	
+		#logo a
+		{
+			display: block;
+			text-decoration: none;
+			font-size: 62.5%;
+			font-weight: 600;
+			color: #FFF;
+		}
+
 th:after {
-  background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,.08));
+  background:  #062901;
+
   content: '';
   display: block;
   height: 25%;
@@ -135,7 +191,8 @@ ul li a {
   color: #fff;
 }
  
-ul li a:hover { background: #2c3e50; }
+ul li a:hover { background:  #062901;
+; }
  
 /* Display the dropdown */
  
@@ -147,9 +204,11 @@ li:hover > ul {
  
 li:hover li { float: none; }
  
-li:hover a { background: #1bc2a2; }
+li:hover a { background:  #062901;
+; }
  
-li:hover li a:hover { background: #2c3e50; }
+li:hover li a:hover { background: #062901;
+; }
  
 .main-navigation li ul li { border-top: 0; }
  

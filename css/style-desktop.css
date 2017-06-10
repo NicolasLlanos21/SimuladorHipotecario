@@ -25,9 +25,11 @@
 
 	#logo
 	{
-		position: absolute;
-		left: 0em;
-		top: 4.5em;
+	position: absolute;
+	left: 9px;
+	top: 57px;
+	width: 778px;
+	height: 98px;
 	}
 	
 		#logo h1

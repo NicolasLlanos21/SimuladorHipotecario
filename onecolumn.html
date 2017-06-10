@@ -1,0 +1,164 @@
+    <?php
+	
+    	require_once('sesion.php');
+      if(!isset($_SESSION)) 
+      { 
+        session_start(); 
+      } 
+      if($_SERVER["REQUEST_METHOD"] == "POST") {
+      // username and password sent from form 
+      $sesion = new sesion();  
+      $myusername = $_POST['username'];
+      $mypassword = $_POST['password'];
+      if (empty($myusername) or empty($mypassword)){
+          phpAlert("Por favor digite el usuario y password para ingresar!");
+      }else{ 
+       // If result matched $myusername and $mypassword, table row must be 1 row
+      $count = $sesion->validarUsuario($myusername,$mypassword);
+      if($count == 1) {
+         $_SESSION['login_user'] = $myusername;
+         $idtipo = $sesion->getTipoUsuario($myusername);
+         $_SESSION['user_type'] = $idtipo;
+         $nombres=$sesion->getNombresApellidos($myusername);
+         $_SESSION['user_names'] = $nombres;
+         $idUser = $sesion->getIdUsuario($myusername);
+         $_SESSION['user_id'] = $idUser;
+         header("Location: menuppal.php");
+      }else {
+        phpAlert("Usuario y/o password incorrecto. Por favor validelo!");
+         //$error = "Your Login Name or Password is invalid";
+      }
+    }
+   }
+
+   function phpAlert($msg) {
+    echo '<script type="text/javascript">alert("' . $msg . '")</script>';
+    }
+
+    ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+<!--
+	Autonomy by TEMPLATED
+    templated.co @templatedco
+    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+	<head>
+		<title>CENTRO ANDINA</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
+		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-panels.min.js"></script>
+		<script src="js/init.js"></script>
+		<style type="text/css">
+<!--
+.Estilo2 {
+	font-size: 24px;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+-->
+        </style>
+<noscript>
+			<link rel="stylesheet" href="css/skel-noscript.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-desktop.css" />
+		</noscript>
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+		<div id="header">
+		  <div class="container">
+				
+				<!-- Logo -->
+				<div id="logo">
+					<h1><a href="#">COOPERATIVA FINANCIERA CENTRO ANDINA</a></h1>
+					<p align="center" class="Estilo2">Ayudamos a tu progreso</p>
+					<p>&nbsp;</p>
+			  </div>
+
+				
+			  <!-- Nav -->
+			  <nav id="nav">
+				  <ul>
+					  <li><a href="index.html">Inicio</a></li>
+					  <li><a href="twocolumn1.html">Mision</a></li>
+					  <li><a href="twocolumn2.html">Politicas</a></li>
+					  <li class="active"><a href="onecolumn.html">Calculador hipotecario</a></li>
+				  </ul>
+			  </nav>
+			</div>
+		</div>
+		<!-- Header -->
+
+		<div id="banner">&nbsp;</div>
+
+		<div id="featured">
+			<div class="container">
+				<div class="row">
+					<div class="12u">
+					  <section>
+							<header>
+								<h2>Calculador hipotecario</h2>
+							</header>
+							<div>
+    <form name="loginform" action="" method="post">
+    <table width="486" height="213" border="0" align="center" cellpadding="2" cellspacing="5" bgcolor="#CCCDD6">
+      <tr border="0">
+        <td width="182"><div align="right" style="font-weight:bold">Nombre de Usuario:</div></td>
+        <td width="209"><input name="username" type="text" /></td>
+      </tr>
+      <tr>
+        <td><div align="right" style="font-weight:bold">Password:</div></td>
+        <td><input name="password" type="password" /></td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center"><input name="" type="submit" value="Enviar" /></td>
+      </tr>
+    </table>
+    </form>
+    <p>&nbsp;</p>
+						</div>
+							</section>
+					</div>		
+				</div>
+			</div>
+		</div>
+		<div id="main">
+			<div class="container">
+				<div class="row">
+					<div class="8u">
+						<section>
+							<header>
+								<h2>Naturaleza Jurídica Y Denominación Social.</h2>
+							</header>
+							<p><br>
+La Cooperativa  financiera Centro Andina es una persona jurídica de derecho privado que tiene  el fin de asociar sin ánimo de lucro y de carácter multiactivo, que se  caracteriza por tener un número de asociados ilimitado, regida por los  principios y valores universales y la doctrina cooperativa.</p>
+							<p><br>
+							  Fue constituida  en 2016, recibiendo reconocimiento legal frente al Ministerio de Trabajo y la  Superintendencia Financiera, mediante Resolución 1525 del 08 de diciembre de  2016.</p>
+						</section>
+					</div>
+					<div class="4u">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Copyright -->
+		<div id="copyright">
+			<div class="container">
+				Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
+			</div>
+		</div>
+
+	</body>
+</html>
