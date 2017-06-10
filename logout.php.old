@@ -1,5 +1,5 @@
 <?php
-include 'logsimulador.php';
+include 'index.php';
 
 class logout{
 
@@ -12,7 +12,7 @@ session_start();
 session_unset();
 session_destroy();
 ob_start();
-header("Location: logsimulador.php");
+header("Location: index.php");
 ob_end_flush(); 
 
 //include 'home.php';
