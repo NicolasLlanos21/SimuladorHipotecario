@@ -8,7 +8,7 @@
 
       public function conexionBD(){
        try{
-        $pdo = new PDO('mysql:host=172.31.4.43;dbname=simulador', $this->mysql_user, $this->mysql_password);
+        $pdo = new PDO('mysql:host=44.198.58.138;dbname=simulador', $this->mysql_user, $this->mysql_password);
       }catch(PDOException $ex){
              die('Unable to connect');
        } 
