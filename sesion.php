@@ -2,13 +2,13 @@
 		
      class sesion{
 
-      public $mysql_user = 'root';
-      public $mysql_password = '';
+      public $mysql_user = 'user';
+      public $mysql_password = 'Jen202400*';
       public $pdo;
 
       public function conexionBD(){
        try{
-        $pdo = new PDO('mysql:host=44.198.58.138;dbname=simulador', $this->mysql_user, $this->mysql_password);
+        $pdo = new PDO('mysql:host=172.31.4.43;dbname=simulador', $this->mysql_user, $this->mysql_password);
       }catch(PDOException $ex){
              die('Unable to connect');
        } 
